@@ -1,0 +1,100 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../dist/output.css">
+    <link rel="shortcut icon" href="../img/Calculator_icon.png" type="image/x-icon">
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap"
+      rel="stylesheet" 
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com/3.3.0"></script>
+    <script>
+      tailwind.config = {
+          darkMode: "class",
+          theme: {
+            safelist: ['animate-[fade-in_1s_ease-in-out]', 'animate-[fade-in-down_1s_ease-in-out]','animate-[fade-out-up_1s_ease-in-out]'],
+          fontFamily: {
+              sans: ["Roboto", "sans-serif"],
+              body: ["Roboto", "sans-serif"],
+              mono: ["ui-monospace", "monospace"],
+          },
+          },
+          corePlugins: {
+          preflight: false,
+          },
+      };
+    </script>
+    <title>Calculator</title>
+</head>
+<body  class="bg-gradient-to-r text-white from-purple-500 from-10% via-pink-500 via-30% to-red-500 to-60% flex relative justify-center items-center">
+  <!-- calculator -->
+      <div class="container w-72 h-3/4  py-1 shadow-lg flex flex-col rounded-md bg-white bg-opacity-20 justify-between">
+      <!-- screen -->
+      <div class="w-full h-2/5 flex flex-col " style="height: 35%;">
+        <div class="w-full h-1/4 flex flex-row justify-start items-start">
+          <div class="w-2 h-2 rounded bg-white bg-opacity-40 ml-1 mt-2"></div>
+          <div class="w-2 h-2 rounded bg-white bg-opacity-40 ml-1 mt-2"></div>
+          <div class="w-2 h-2 rounded bg-white bg-opacity-40 ml-1 mt-2"></div>
+        </div>
+        <div class="w-full h-1/4 flex justify-end ">
+          <input type="text" class="bg-transparent w-full  text-right px-5 text-lg opacity-75" value="" id="display" disabled>
+        </div>
+        <div class="w-full h-2/4 flex justify-end ">
+          <input type="text" class="bg-transparent w-full  text-right px-5 text-5xl opacity-95" value="0" id="result" disabled>
+        </div>
+      </div>
+      <!-- //screen// -->
+      <!-- buttons -->
+      <div class="w-full h-4/5 flex flex-col justify-around">
+        <div class="w-full h-1/6 flex flex-row justify-around ">
+          <button class="px-9 mb-1  flex justify-center items-center w-1/5 bg-white bg-opacity-20" onclick="clearDisplay()">C</button>
+          <button class="px-8 mb-1 flex justify-center items-center w-1/5 bg-white bg-opacity-20" onclick="appendToDisplay('√')">√</button>
+          <button class="px-8 mb-1 flex justify-center items-center w-1/5 bg-white bg-opacity-20" onclick="appendToDisplay('(')">(</button>
+          <button class="px-9 mb-1 flex justify-center items-center w-1/5 bg-white bg-opacity-20" onclick="appendToDisplay(')')">)</button>
+        </div>
+        <div class="w-full h-1/6 flex flex-row justify-around ">
+          <button class="px-9 mb-1 flex justify-center items-center w-1/5 bg-white bg-opacity-20" onclick="returnByOne()">Del</button>
+          <button class="px-8 mb-1 flex justify-center items-center w-1/5 bg-white bg-opacity-20" onclick="appendToDisplay('^')">^</button>
+          <button class="px-8 mb-1 flex justify-center items-center w-1/5 bg-white bg-opacity-20" onclick="appendToDisplay('%')">%</button>
+          <button class="px-9 mb-1 flex justify-center items-center w-1/5 bg-white bg-opacity-20" onclick="appendToDisplay('/')">/</button>
+        </div>
+        <div class="w-full h-1/6 flex flex-row justify-around ">
+          <button  class="px-9 mb-1 flex justify-center items-center w-1/5 bg-white bg-opacity-20" onclick="appendToDisplay('7')">7</button>
+          <button  class="px-8 mb-1 flex justify-center items-center w-1/5 bg-white bg-opacity-20" onclick="appendToDisplay('8')">8</button>
+          <button  class="px-8 mb-1 flex justify-center items-center w-1/5 bg-white bg-opacity-20" onclick="appendToDisplay('9')">9</button>
+          <button  class="px-9 mb-1 flex justify-center items-center w-1/5 bg-white bg-opacity-20" onclick="appendToDisplay('*')">x</button>
+        </div>
+        <div class="w-full h-1/6 flex flex-row justify-around ">
+          <button  class="px-9 mb-1 flex justify-center items-center w-1/5 bg-white bg-opacity-20" onclick="appendToDisplay('4')">4</button>
+          <button  class="px-8 mb-1 flex justify-center items-center w-1/5 bg-white bg-opacity-20" onclick="appendToDisplay('5')">5</button>
+          <button  class="px-8 mb-1 flex justify-center items-center w-1/5 bg-white bg-opacity-20" onclick="appendToDisplay('6')">6</button>
+          <button  class="px-9 mb-1 flex justify-center items-center w-1/5 bg-white bg-opacity-20" onclick="appendToDisplay('-')">-</button>
+        </div>
+        <div class="w-full h-1/6 flex flex-row justify-around ">
+          <button  class="px-9 mb-1 flex justify-center items-center w-1/5 bg-white bg-opacity-20" onclick="appendToDisplay('1')">1</button>
+          <button  class="px-8 mb-1 flex justify-center items-center w-1/5 bg-white bg-opacity-20" onclick="appendToDisplay('2')">2</button>
+          <button  class="px-8 mb-1 flex justify-center items-center w-1/5 bg-white bg-opacity-20" onclick="appendToDisplay('3')">3</button>
+          <button  class="px-9 mb-1 flex justify-center items-center w-1/5 bg-white bg-opacity-20" onclick="appendToDisplay('+')">+</button>
+        </div>
+        <div class="w-full h-1/6 flex flex-row justify-around ">
+          <button  class="px-9 flex justify-center items-center w-1/5 bg-white bg-opacity-20" onclick="appendToDisplay('.')">.</button>
+          <button  class="px-8 flex justify-center items-center  w-1/5 bg-white bg-opacity-20" onclick="appendToDisplay('0')">0</button>
+          <button  class="flex justify-center items-center  bg-white bg-opacity-20" style="width: 140px;" onclick="calculate()">Enter</button>
+        </div>  
+      </div>
+      <!-- //buttons// -->
+    </div>
+<!-- //calculator// -->
+<!-- alert warning -->
+<div id="ShowWarningAlert" class="mt-1  animate-[fade-in-down_1s_ease-in-out] hidden   rounded-lg bg-danger-100 px-6 py-5 text-base text-danger-700 absolute top-0 left-30" role="alert">Please do any operation !</div>
+<!--// alert warning// -->
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+<script src="./app.js"></script>
+</html>
